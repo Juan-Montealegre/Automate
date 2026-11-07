@@ -1,8 +1,8 @@
 /**
  * @license
- * Razón Social: Desarrollo de software y Automatización
+ * Nombre del Proyecto: Automate Webs
+ * Razón Social / Subtítulo: Desarrollo de Software y Automatización
  * Componente: index.jsx
- * Orquestador principal con navegación comercial sobria y minimalista.
  */
 
 import React, { useState } from 'react';
@@ -39,21 +39,24 @@ export default function IndexApp() {
 
   return (
     <div className="min-vh-100 d-flex flex-column bg-slate-50">
-      {/* Top Bar Minimalista y Comercial */}
+      {/* Top Bar Minimalista - Automate Webs */}
       <header className="bg-white border-bottom border-subtle-custom sticky-top z-30">
         <div className="container-fluid px-4 py-2.5 d-flex align-items-center justify-content-between gap-4" style={{ maxWidth: '1440px' }}>
-          {/* Zone 1: Marca Corporativa */}
+          {/* Zone 1: Marca Corporativa Automate Webs */}
           <button
             type="button"
-            className="text-start border-0 bg-transparent p-0 d-inline-flex align-items-center gap-2 cursor-pointer"
+            className="text-start border-0 bg-transparent p-0 d-inline-flex align-items-center gap-2.5 cursor-pointer"
             onClick={() => setActiveView('negocio')}
           >
-            <span className="w-7 h-7 rounded bg-slate-900 text-white d-flex align-items-center justify-content-center text-xs font-mono font-bold">
-              DA
-            </span>
-            <div className="d-flex flex-col">
-              <span className="text-sm font-bold text-slate-900 tracking-tight whitespace-nowrap">
+            <div className="w-7 h-7 rounded-lg bg-slate-950 text-white d-flex align-items-center justify-content-center text-xs font-mono font-bold shadow-2xs">
+              AW
+            </div>
+            <div className="d-flex flex-column">
+              <span className="text-sm font-bold text-slate-900 tracking-tight whitespace-nowrap leading-tight">
                 {EMPRESA_INFO.razonSocial}
+              </span>
+              <span className="text-2xs text-slate-400 font-medium whitespace-nowrap leading-none mt-0.5">
+                {EMPRESA_INFO.tagline}
               </span>
             </div>
           </button>
@@ -93,7 +96,7 @@ export default function IndexApp() {
           <div className="d-flex align-items-center gap-2">
             <button
               type="button"
-              className="btn btn-dark btn-sm px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap d-inline-flex align-items-center gap-1.5"
+              className="btn btn-dark btn-sm px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap d-inline-flex align-items-center gap-1.5 shadow-2xs"
               onClick={() => {
                 if (activeView !== 'crud') {
                   setCrudInitialEntity('productos');
@@ -156,14 +159,14 @@ export default function IndexApp() {
       </main>
 
       {/* Footer Minimalista Comercial */}
-      <footer className="border-top border-subtle-custom bg-white py-3 mt-auto">
+      <footer className="border-top border-subtle-custom bg-white py-3.5 mt-auto">
         <div className="container-fluid px-4 d-flex flex-wrap justify-content-between align-items-center gap-2 text-xs text-slate-500" style={{ maxWidth: '1440px' }}>
           <div>
-            <span className="font-medium text-slate-700">{EMPRESA_INFO.razonSocial}</span>
+            <span className="font-bold text-slate-800">{EMPRESA_INFO.razonSocial}</span>
+            <span className="mx-2">·</span>
+            <span>{EMPRESA_INFO.tagline}</span>
             <span className="mx-2">·</span>
             <span>NIT: {EMPRESA_INFO.nit}</span>
-            <span className="mx-2">·</span>
-            <span>{EMPRESA_INFO.sector}</span>
           </div>
           <div className="text-slate-400">
             {EMPRESA_INFO.direccion} · Tel: {EMPRESA_INFO.telefono}

@@ -6,13 +6,14 @@
  */
 
 export const EMPRESA_INFO = {
-  razonSocial: 'Desarrollo de software y Automatización',
+  razonSocial: 'Automate Webs',
+  tagline: 'Desarrollo de Software y Automatización',
   nit: '901.482.391-4',
-  sector: 'Tecnología, Consultoría y Automatización de Procesos',
+  sector: 'Ingeniería de Software, Cloud y Automatización RPA',
   direccion: 'Calle 53 # 10-60, Bogotá D.C., Colombia',
   telefono: '+57 (601) 382 1000',
-  email: 'contacto@softwareyautomatizacion.com.co',
-  sitioWeb: 'https://softwareyautomatizacion.com.co',
+  email: 'contacto@automatewebs.co',
+  sitioWeb: 'https://automatewebs.co',
   mision:
     'Desarrollar soluciones de software innovadoras, seguras y de alta calidad que ayuden a empresas y emprendedores a digitalizar y automatizar sus procesos, ofreciendo productos personalizados que impulsen su crecimiento y competitividad a base de su página web.',
   vision:

@@ -1,6 +1,6 @@
 /**
  * @license
- * Razón Social: Desarrollo de software y Automatización
+ * Proyecto: Automate Webs
  * Componente: CrudTable.jsx
  * Tabla comercial sobria y minimalista para visualización y gestión de datos.
  */

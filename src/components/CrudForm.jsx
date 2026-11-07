@@ -1,6 +1,6 @@
 /**
  * @license
- * Razón Social: Desarrollo de software y Automatización
+ * Proyecto: Automate Webs
  * Componente: CrudForm.jsx
  * Formulario de creación y edición sobrio, minimalista y comercial.
  */

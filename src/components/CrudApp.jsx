@@ -1,6 +1,7 @@
 /**
  * @license
- * Razón Social: Desarrollo de software y Automatización
+ * Proyecto: Automate Webs
+ * Razón Social / Tagline: Desarrollo de Software y Automatización
  * Componente: CrudApp.jsx
  * Orquestador central de operaciones CRUD con diseño sobrio y minimalista.
  */
@@ -150,7 +151,7 @@ export default function CrudApp({ initialEntity = 'productos', onStatsUpdate }) 
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
-    link.setAttribute('download', `${entity}_${Date.now()}.csv`);
+    link.setAttribute('download', `automate_webs_${entity}_${Date.now()}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -162,13 +163,13 @@ export default function CrudApp({ initialEntity = 'productos', onStatsUpdate }) 
       fullDb[entity] = INITIAL_DATA[entity] || [];
       mockJsonServer.saveDb(fullDb);
       setDb(INITIAL_DATA[entity] || []);
-      showFeedback(`Datos restablecidos a valores originales.`, 'secondary');
+      showFeedback(`Datos de "${entity}" restablecidos a valores originales.`, 'secondary');
     }
   };
 
   const entityMetadata = {
-    productos: { label: 'Catálogo de Servicios & Software', short: 'Productos', icon: 'bi-box-seam' },
-    clientes: { label: 'Cartera de Clientes Comerciales', short: 'Clientes', icon: 'bi-people' },
+    productos: { label: 'Catálogo de Soluciones & Software', short: 'Productos', icon: 'bi-box-seam' },
+    clientes: { label: 'Directorio de Clientes Corporativos', short: 'Clientes', icon: 'bi-people' },
     proveedores: { label: 'Proveedores de Infraestructura TI', short: 'Proveedores', icon: 'bi-truck' },
     compras: { label: 'Inversión & Compras Operativas', short: 'Compras', icon: 'bi-cart-check' },
     ventas: { label: 'Contratos & Ventas Formalizadas', short: 'Ventas', icon: 'bi-cash-stack' },
@@ -176,11 +177,11 @@ export default function CrudApp({ initialEntity = 'productos', onStatsUpdate }) 
 
   return (
     <div className="container py-4" style={{ maxWidth: '1240px' }}>
-      {/* Barra de Navegación Segmentada de Entidades */}
+      {/* Selector de Módulos Automate Webs */}
       <div className="d-flex flex-column sm:flex-row justify-content-between align-items-start sm:align-items-center gap-3 mb-4">
         <div>
-          <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
-            Gestión Operativa
+          <div className="text-2xs font-bold text-slate-400 uppercase tracking-wider mb-1 font-mono">
+            Automate Webs · Centro de Operaciones
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-0">
             {entityMetadata[entity]?.label}
@@ -195,7 +196,7 @@ export default function CrudApp({ initialEntity = 'productos', onStatsUpdate }) 
               type="button"
               className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-colors border-0 ${
                 entity === key
-                  ? 'bg-slate-900 text-white font-semibold'
+                  ? 'bg-slate-900 text-white font-semibold shadow-2xs'
                   : 'text-slate-600 bg-transparent hover:text-slate-900 hover:bg-slate-100'
               }`}
               onClick={() => {
@@ -214,7 +215,7 @@ export default function CrudApp({ initialEntity = 'productos', onStatsUpdate }) 
       {/* Alerta de Feedback Sutil */}
       {feedback && (
         <div
-          className={`px-3 py-2.5 rounded-md text-xs font-medium mb-3 d-flex align-items-center justify-content-between ${
+          className={`px-3 py-2 rounded-md text-xs font-medium mb-3 d-flex align-items-center justify-content-between ${
             feedback.type === 'success'
               ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
               : feedback.type === 'info'
@@ -236,14 +237,14 @@ export default function CrudApp({ initialEntity = 'productos', onStatsUpdate }) 
 
       {error && (
         <div className="p-3 bg-rose-50 text-rose-800 border border-rose-200 rounded-md text-xs mb-3">
-          <strong>Error de conexión:</strong> {error.statusText || 'No se pudo comunicar con el servicio de datos.'}
+          <strong>Error:</strong> {error.statusText || 'No se pudo comunicar con el servicio de datos.'}
         </div>
       )}
 
       {/* Franja de Control Superior: Acciones Rápidas */}
       <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-        <div className="d-flex align-items-center gap-2 text-xs text-slate-500">
-          <span>{db.length} registros en total</span>
+        <div className="d-flex align-items-center gap-2 text-xs text-slate-500 font-mono">
+          <span className="font-semibold text-slate-800">{db.length}</span> registros en base de datos
         </div>
 
         <div className="d-flex items-center gap-2">

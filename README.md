@@ -1,18 +1,21 @@
-# DESARROLLO DE SOFTWARE Y AUTOMATIZACIÓN
-## Plataforma de Gestión Empresarial y Arquitectura CRUD REST
+# AUTOMATE WEBS
+## Desarrollo de Software y Automatización · Plataforma de Gestión Empresarial
 
 ---
 
 ## 1. Contexto del Proyecto
 
-Sistema integral de gestión comercial y operacional para la empresa **Desarrollo de software y Automatización**. La plataforma implementa un diseño minimalista, sobrio y corporativo para la administración centralizada de datos de negocio (**productos/servicios**, **clientes**, **proveedores**, **compras** y **ventas**), consumiendo una API REST simulada (`json-server`) con sincronización persistente en `localStorage` a través del helper `helpFetch` y hooks de React (`useState`, `useEffect`).
+Sistema integral de gestión comercial y operacional para la empresa **Automate Webs** (*Desarrollo de Software y Automatización*). La plataforma implementa un diseño minimalista, sobrio y de alto impacto corporativo para la administración centralizada de datos de negocio (**productos/servicios**, **clientes**, **proveedores**, **compras** y **ventas**), consumiendo una API REST simulada con sincronización persistente en `localStorage` a través del helper `helpFetch` y hooks de React (`useState`, `useEffect`).
 
 ---
 
 ## 2. Identidad Corporativa del Negocio
 
-### Razón Social
-**Desarrollo de software y Automatización**
+### Nombre Comercial / Proyecto
+**Automate Webs**
+
+### Razón Social / Especialidad
+**Desarrollo de Software y Automatización**
 
 ### Misión
 > Desarrollar soluciones de software innovadoras, seguras y de alta calidad que ayuden a empresas y emprendedores a digitalizar y automatizar sus procesos, ofreciendo productos personalizados que impulsen su crecimiento y competitividad a base de su página web.

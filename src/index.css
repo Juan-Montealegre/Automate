@@ -15,6 +15,7 @@ body {
   background-color: #f8fafc;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.011em;
 }
 
 .font-mono, .tabular-nums, code, pre {
@@ -31,7 +32,12 @@ body {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 0.75rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.03);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-minimal:hover {
+  border-color: #cbd5e1;
 }
 
 .table-custom th {
@@ -53,6 +59,10 @@ body {
   border-bottom: 1px solid #f1f5f9;
 }
 
+.table-custom tbody tr {
+  transition: background-color 0.1s ease;
+}
+
 .table-custom tbody tr:hover td {
   background-color: #f8fafc;
 }
@@ -70,6 +80,13 @@ body {
   border-color: #0f172a;
   box-shadow: 0 0 0 1px #0f172a;
   outline: none;
+}
+
+/* Logo pulse indicator */
+.brand-badge {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 

@@ -1,6 +1,6 @@
 /**
  * @license
- * Razón Social: Desarrollo de software y Automatización
+ * Proyecto: Automate Webs
  * Componente: CrudTableRow.jsx
  * Fila sobria y minimalista con números tabulares y controles limpios.
  */
