@@ -1,0 +1,6 @@
+{
+  "name": "UniLibre CRUD - Desarrollo de Software y Automatización",
+  "description": "Laboratorio IV de Programación Web: Sistema CRUD en React con helper helpFetch, simulación de API json-server, persistencia en localStorage y diseño empresarial con Bootstrap.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

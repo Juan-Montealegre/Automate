@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+  --bs-font-sans-serif: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --bs-font-monospace: 'JetBrains Mono', monospace;
+  --bs-body-bg: #f8fafc;
+  --bs-body-color: #0f172a;
+  --bs-primary: #0f172a;
+  --bs-primary-rgb: 15, 23, 42;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #0f172a;
+  background-color: #f8fafc;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-mono, .tabular-nums, code, pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Minimalist border and surface styles */
+.border-subtle-custom {
+  border-color: #e2e8f0 !important;
+}
+
+.card-minimal {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+}
+
+.table-custom th {
+  background-color: #f8fafc;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  font-weight: 600;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.75rem 1rem;
+}
+
+.table-custom td {
+  vertical-align: middle;
+  font-size: 0.875rem;
+  padding: 0.85rem 1rem;
+  color: #1e293b;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.table-custom tbody tr:hover td {
+  background-color: #f8fafc;
+}
+
+/* Subtle form controls */
+.form-control-minimal, .form-select-minimal {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  padding: 0.55rem 0.85rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control-minimal:focus, .form-select-minimal:focus {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 1px #0f172a;
+  outline: none;
+}
+
+
