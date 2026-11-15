@@ -1,152 +1,169 @@
 /**
- * @license
- * Proyecto: Automate Webs
- * Componente: CrudTableRow.jsx
- * Fila sobria y minimalista con números tabulares y controles limpios.
+ * Fila individual de tabla CRUD con soporte de ajuste rápido de stock e inspección de factura.
  */
 
 import React from 'react';
+import { formatCurrencyCOP } from '../helpers/helpFetch';
 
-export default function CrudTableRow({ entity, el, setDataToEdit, deleteData }) {
-  const formatCurrency = (val) => {
-    return `$${Number(val || 0).toLocaleString('es-CO')}`;
-  };
-
-  const renderCells = () => {
-    switch (entity) {
-      case 'productos':
-        return (
-          <>
-            <td className="font-medium text-slate-900">{el.nombre}</td>
-            <td className="text-slate-600 text-xs">{el.categoria}</td>
-            <td className="text-slate-500 text-xs truncate" style={{ maxWidth: '240px' }} title={el.descripcion}>
-              {el.descripcion}
-            </td>
-            <td className="font-mono text-slate-900 text-end font-semibold">
-              {formatCurrency(el.precio)}
-            </td>
-            <td className="text-slate-600 font-mono text-xs">{el.plazo}</td>
-            <td>
-              <span
-                className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                  el.estado === 'Activo'
-                    ? 'bg-emerald-50 text-emerald-700'
-                    : 'bg-slate-100 text-slate-600'
-                }`}
-              >
-                {el.estado || 'Activo'}
-              </span>
-            </td>
-          </>
-        );
-
-      case 'clientes':
-        return (
-          <>
-            <td className="font-medium text-slate-900">{el.nombre}</td>
-            <td className="font-mono text-xs text-slate-600">{el.nit}</td>
-            <td className="text-slate-700 text-xs">{el.contacto}</td>
-            <td className="font-mono text-xs text-slate-500">{el.email}</td>
-            <td className="font-mono text-xs text-slate-600">{el.telefono}</td>
-            <td className="text-slate-600 text-xs">{el.ciudad}</td>
-            <td className="text-slate-700 text-xs">{el.sector}</td>
-          </>
-        );
-
-      case 'proveedores':
-        return (
-          <>
-            <td className="font-medium text-slate-900">{el.nombre}</td>
-            <td className="text-slate-700 text-xs font-medium">{el.servicio}</td>
-            <td className="text-slate-600 text-xs">{el.contacto}</td>
-            <td className="font-mono text-xs text-slate-500">{el.email}</td>
-            <td className="font-mono text-xs text-slate-600">{el.telefono}</td>
-            <td className="text-slate-500 text-xs">{el.pais || 'Colombia'}</td>
-          </>
-        );
-
-      case 'compras':
-        return (
-          <>
-            <td className="font-mono text-xs text-slate-500">{el.fecha}</td>
-            <td className="font-medium text-slate-900 text-xs">{el.proveedor}</td>
-            <td className="text-slate-600 text-xs truncate" style={{ maxWidth: '240px' }} title={el.concepto}>
-              {el.concepto}
-            </td>
-            <td className="text-slate-500 text-xs">{el.categoria}</td>
-            <td className="font-mono text-end font-semibold text-rose-700">
-              {formatCurrency(el.costo)}
-            </td>
-            <td className="text-slate-600 text-xs">{el.metodoPago}</td>
-            <td>
-              <span
-                className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                  el.estado === 'Pagado'
-                    ? 'bg-emerald-50 text-emerald-700'
-                    : 'bg-amber-50 text-amber-700'
-                }`}
-              >
-                {el.estado || 'Pagado'}
-              </span>
-            </td>
-          </>
-        );
-
-      case 'ventas':
-        return (
-          <>
-            <td className="font-mono text-xs text-slate-500">{el.fecha}</td>
-            <td className="font-medium text-slate-900 text-xs">{el.cliente}</td>
-            <td className="text-slate-700 text-xs">{el.producto}</td>
-            <td className="font-mono text-end font-semibold text-emerald-700">
-              {formatCurrency(el.valor)}
-            </td>
-            <td className="text-slate-500 text-xs">{el.formaPago}</td>
-            <td>
-              <span
-                className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                  el.estado === 'Implementado' || el.estado === 'Facturado'
-                    ? 'bg-emerald-50 text-emerald-700'
-                    : el.estado === 'En Desarrollo'
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'bg-amber-50 text-amber-700'
-                }`}
-              >
-                {el.estado}
-              </span>
-            </td>
-            <td className="text-slate-500 text-xs">{el.responsable}</td>
-          </>
-        );
-
-      default:
-        return <td>{JSON.stringify(el)}</td>;
-    }
-  };
-
+export default function CrudTableRow({
+  entity,
+  item,
+  setDataToEdit,
+  onRequestDelete,
+  onAdjustStock,
+  onViewFactura,
+}) {
   return (
     <tr>
-      <td className="font-mono text-center text-slate-400 text-xs">{el.id}</td>
-      {renderCells()}
-      <td className="text-end whitespace-nowrap">
-        <div className="d-inline-flex gap-1">
+      {entity === 'productos' && (
+        <>
+          <td className="font-mono small">{item.sku || `AW-${item.id}`}</td>
+          <td>
+            <div className="fw-semibold">{item.nombre}</div>
+            <div className="small text-secondary">{item.categoria}</div>
+          </td>
+          <td className="font-mono fw-semibold">{formatCurrencyCOP(item.precio)}</td>
+          <td>
+            <div className="d-flex align-items-center gap-2">
+              <span
+                className={`badge font-mono ${
+                  Number(item.stock ?? 0) === 0
+                    ? 'text-bg-danger'
+                    : Number(item.stock ?? 0) <= Number(item.stockMinimo ?? 2)
+                    ? 'text-bg-warning text-dark'
+                    : 'text-bg-success'
+                }`}
+              >
+                {item.stock ?? 0} uds
+              </span>
+              <div className="btn-group btn-group-sm" role="group" aria-label="Ajustar stock">
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary py-0 px-2"
+                  title="Descontar 1 unidad"
+                  aria-label={`Descontar 1 unidad de ${item.nombre}`}
+                  onClick={() => onAdjustStock(item.id, -1)}
+                >
+                  -1
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary py-0 px-2"
+                  title="Reabastecer 5 unidades"
+                  aria-label={`Agregar 5 unidades a ${item.nombre}`}
+                  onClick={() => onAdjustStock(item.id, 5)}
+                >
+                  +5
+                </button>
+              </div>
+            </div>
+          </td>
+          <td>
+            <span
+              className={`badge ${
+                item.estado === 'Agotado' ? 'text-bg-danger' : 'text-bg-light border text-dark'
+              }`}
+            >
+              {item.estado}
+            </span>
+          </td>
+        </>
+      )}
+
+      {entity === 'clientes' && (
+        <>
+          <td>
+            <div className="fw-semibold">{item.nombre}</div>
+            <div className="small text-secondary">{item.contacto}</div>
+          </td>
+          <td className="font-mono small">{item.nit}</td>
+          <td className="small">{item.email}</td>
+          <td className="font-mono small">{item.telefono}</td>
+          <td className="small">{item.ciudad}</td>
+        </>
+      )}
+
+      {entity === 'proveedores' && (
+        <>
+          <td className="fw-semibold">{item.nombre}</td>
+          <td className="small">{item.servicio}</td>
+          <td className="small">{item.email}</td>
+          <td className="font-mono small">{item.telefono}</td>
+          <td className="small">{item.pais}</td>
+        </>
+      )}
+
+      {entity === 'compras' && (
+        <>
+          <td className="font-mono small">{item.fecha}</td>
+          <td className="fw-semibold">{item.proveedor}</td>
+          <td className="small">{item.concepto}</td>
+          <td className="font-mono fw-semibold">{formatCurrencyCOP(item.costo)}</td>
+          <td>
+            <span
+              className={`badge ${
+                item.estado === 'Pagado' ? 'text-bg-success' : 'text-bg-warning text-dark'
+              }`}
+            >
+              {item.estado}
+            </span>
+          </td>
+        </>
+      )}
+
+      {entity === 'ventas' && (
+        <>
+          <td className="font-mono small">{item.fecha}</td>
+          <td className="fw-semibold">{item.cliente}</td>
+          <td className="small">{item.producto}</td>
+          <td className="font-mono fw-semibold">{formatCurrencyCOP(item.valor)}</td>
+          <td>
+            <span className="badge text-bg-light border text-dark">{item.estado}</span>
+          </td>
+        </>
+      )}
+
+      {entity === 'facturas' && (
+        <>
+          <td className="font-mono fw-bold">{item.numero}</td>
+          <td className="font-mono small">{item.fecha}</td>
+          <td>
+            <div className="fw-semibold">{item.clienteNombre}</div>
+            <div className="small text-secondary font-mono">{item.clienteDocumento}</div>
+          </td>
+          <td className="small">{item.metodoPago}</td>
+          <td className="font-mono fw-bold text-primary">{formatCurrencyCOP(item.total)}</td>
+        </>
+      )}
+
+      <td className="text-end text-nowrap">
+        {entity === 'facturas' ? (
           <button
             type="button"
-            className="btn btn-link btn-sm text-slate-600 hover:text-slate-900 p-1 text-xs text-decoration-none"
-            onClick={() => setDataToEdit(el)}
-            title="Editar registro"
+            className="btn btn-sm btn-outline-dark me-1"
+            onClick={() => onViewFactura(item)}
           >
-            <i className="bi bi-pencil me-1"></i>Editar
+            <i className="bi bi-receipt me-1" aria-hidden="true"></i>
+            Ver / Imprimir
           </button>
+        ) : (
           <button
             type="button"
-            className="btn btn-link btn-sm text-slate-400 hover:text-rose-600 p-1 text-xs text-decoration-none"
-            onClick={() => deleteData(el.id, el.nombre || el.concepto || el.producto || 'este registro')}
-            title="Eliminar registro"
+            className="btn btn-sm btn-outline-primary me-1"
+            aria-label={`Editar ${item.nombre || item.cliente || item.proveedor || item.id}`}
+            onClick={() => setDataToEdit(item)}
           >
-            <i className="bi bi-trash3 me-1"></i>Eliminar
+            <i className="bi bi-pencil" aria-hidden="true"></i>
           </button>
-        </div>
+        )}
+        <button
+          type="button"
+          className="btn btn-sm btn-outline-danger"
+          aria-label={`Eliminar registro ${item.numero || item.nombre || item.cliente || item.id}`}
+          onClick={() => onRequestDelete(item)}
+        >
+          <i className="bi bi-trash" aria-hidden="true"></i>
+        </button>
       </td>
     </tr>
   );
