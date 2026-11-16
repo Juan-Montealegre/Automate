@@ -8,7 +8,7 @@ import type { Request, Response } from 'express';
 import path from 'node:path';
 import dotenv from 'dotenv';
 import { createServer as createViteServer } from 'vite';
-import { createExpressApp } from './backend/createApp.ts';
+import { createExpressApp } from './api/[...route].js';
 
 dotenv.config();
 
